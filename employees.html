@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+
+    </style>
+    <script>
+        function Edit(button) {
+            const row = button.closest('tr');
+            const cells = row.querySelectorAll("td");
+            document.getElementById('input1').value = cells[0].textContent;
+            document.getElementById('input2').value = cells[1].textContent;
+            document.getElementById('input3').value = cells[2].textContent;
+            document.getElementById('input4').value = cells[3].textContent;
+            const saveButton = document.getElementById('save');
+            saveButton.onclick = function() {
+                saveChanges(row);  
+            };
+        }
+
+        function saveChanges(row) {
+            row.cells[0].textContent = document.getElementById('input1').value;
+            row.cells[1].textContent = document.getElementById('input2').value;
+            row.cells[2].textContent = document.getElementById('input3').value;
+            row.cells[3].textContent = document.getElementById('input4').value;
+        }
+
+        function Delete(button) {
+            const row = button.closest('tr');
+            row.remove();
+            alert("Row deleted");
+        }
+    </script>
+</head>
+<body>
+    <h1>Employee List</h1>
+
+    <table id="table1">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Joining Date</th>
+        <th>Gender</th>
+        <th>Employee Type</th>
+        <th>Additional Options</th>
+      </tr>
+      <tr>
+        <td>EMP100</td>
+        <td>Ajmi</td>
+        <td>ajmi@gmail.com</td>
+        <td>HR</td>
+        <td>04/28/2023</td>
+        <td>Female</td>
+        <td>Full Time</td>
+        <td><button onclick="Edit(this)">Edit</button> <button onclick="Delete(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td>EMP101</td>
+        <td>Rahi</td>
+        <td>rahi40@gmail.com</td>
+        <td>IT</td>
+        <td>05/18/2020</td>
+        <td>Female</td>
+        <td>Full Time</td>
+        <td><button onclick="Edit(this)">Edit</button> <button onclick="Delete(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td>EMP102</td>
+        <td>Huri</td>
+        <td>huri29@gmail.com</td>
+        <td>Sales</td>
+        <td>05/20/2023</td>
+        <td>Female</td>
+        <td>Full Time</td>
+        <td><button onclick="Edit(this)">Edit</button> <button onclick="Delete(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td>EMP103</td>
+        <td>Supto</td>
+        <td>supto@gmail.com</td>
+        <td>Marketing</td>
+        <td>11/11/2022</td>
+        <td>Male</td>
+        <td>Full Time</td>
+        <td><button onclick="Edit(this)">Edit</button> <button onclick="Delete(this)">Delete</button></td>
+      </tr>
+      <tr>
+        <td>EMP104</td>
+        <td>Shafi</td>
+        <td>shafi20@gmail.com</td>
+        <td>HR</td>
+        <td>10/23/2024</td>
+        <td>Male</td>
+        <td>Full Time</td>
+        <td><button onclick="Edit(this)">Edit</button> <button onclick="Delete(this)">Delete</button></td>
+      </tr>
+    </table>
+
+    <h1>Editable text fields</h1>
+    <table style="margin: auto; text-align: left;">
+        <tr>
+            <td>ID:</td>
+            <td><input type="text" id="input1" name="id"></td>
+        </tr>
+        <tr>
+            <td>Full Name:</td>
+            <td><input type="text" id="input2" name="name"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" id="input3" name="email"></td>
+        </tr>
+        <tr>
+            <td>Department:</td>
+            <td>
+                <select name="department" id="input4">
+                    <option value="">Select Department</option>
+                    <option value="HR">HR</option>
+                    <option value="Sales">Sales</option>
+                    <option value="IT">IT</option>
+                    <option value="Marketing">Marketing</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button id="save" >Save Changes</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        form {
+            width: 500px;
+            margin: auto;
+            padding: 30px;
+            background:whitesmoke ;
+            
+        }
+        button[type="reset"] {
+            background: red;
+            color: white;
+        }
+        button[type="submit"] {
+            background: rgb(93, 164, 93);
+            color: white;
+        }
+        body{
+            font-family: 'Times New Roman', Times, serif;
+            font-size: large;
+        }
+
+        div {
+  width: 320px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 5px solid gray;
+  background-color: burlywood;
+  margin: auto;
+
+}
+ </style>
+    <script>
+        function validateForm(event) {
+            event.preventDefault();
+
+            let id = document.getElementById("input1").value;
+            let name = document.getElementById("input2").value;
+            let email = document.getElementById("input3").value;
+            let department = document.getElementById("input4").value;
+            let date = document.getElementById("input5").value;
+            let genderElement = document.querySelector('input[name="gender"]:checked');
+            let type = document.getElementById("input7");
+
+            document.getElementById("idError").innerText = "";
+            document.getElementById("nameError").innerText = "";
+            document.getElementById("emailError").innerText = "";
+            document.getElementById("departmentErro").innerText = "";
+            document.getElementById("dateError").innerText = "";
+            document.getElementById("genderError").innerText = "";
+            document.getElementById("typeError").innerText = "";
+
+            let isValid = true;
+
+            let idpattern = /^EMP\d{3}$/;
+            let namepattern = /^[A-Za-z\s]+$/;
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            if (!idpattern.test(id)) {
+                document.getElementById("idError").innerText = "* Employee ID must start with 'EMP' followed by 3 digits.";
+                isValid = false;
+            }
+            if (!namepattern.test(name)) {
+                document.getElementById("nameError").innerText = "* Name should only contain alphabets and spaces.";
+                isValid = false;
+            }
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerText = "* Email format must be valid.";
+                isValid = false;
+            }
+            if (department === "") {
+                document.getElementById("departmentErro").innerText = "* Department must be selected.";
+                isValid = false;
+            }
+            if (date === "") {
+                document.getElementById("dateError").innerText = "* Joining Date must not be empty.";
+                isValid = false;
+            }
+            if (!genderElement) {
+                document.getElementById("genderError").innerText = "* Gender must be selected.";
+                isValid = false;
+            }
+            if (!type.checked) {
+                document.getElementById("typeError").innerText = "* Please select employment type.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                document.getElementById('displayid').textContent = `ID: ${id}`;
+                document.getElementById('displayname').textContent = `Full Name: ${name}`;
+                document.getElementById('displayemail').textContent = `Email: ${email}`;
+                document.getElementById('displaydepartment').textContent = `Department: ${department}`;
+                document.getElementById('displaydate').textContent = `Joining Date: ${date}`;
+                document.getElementById('displaygender').textContent = `Gender: ${genderElement.value}`;
+                document.getElementById('displaytype').textContent = `Employment Type: ${type.checked ? "Full Time" : "Not Selected"}`;
+            }
+
+            return isValid;
+        }
+    </script>
+</head>
+
+<body style="background-color: antiquewhite;" >
+    
+    <h1 style="text-align: center; background-color: burlywood;">Employee Registration Form </h1>
+
+    <form onsubmit="return validateForm(event)">
+        <table style="margin: auto; text-align: left;">
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" id="input1" name="id"></td>
+                <td><span id="idError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Full Name:</td>
+                <td><input type="text" id="input2" name="name"></td>
+                <td><span id="nameError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" id="input3" name="email"></td>
+                <td><span id="emailError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Department:</td>
+                <td>
+                    <select name="department" id="input4">
+                        <option value="">Select Department</option>
+                        <option value="HR">HR</option>
+                        <option value="Sales">Sales</option>
+                        <option value="IT">IT</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </td>
+                <td><span id="departmentErro" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Joining Date:</td>
+                <td><input type="date" id="input5" name="date"></td>
+                <td><span id="dateError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Gender:</td>
+                <td>
+                    <input type="radio" id="input6" name="gender" value="male"> Male
+                    <input type="radio" id="input6" name="gender" value="female"> Female
+                </td>
+                <td><span id="genderError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td>Employment Type:</td>
+                <td><input type="checkbox" id="input7" name="type"> Full Time</td>
+                <td><span id="typeError" style="color: red;"></span></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><button type="submit">Submit</button> <button type="reset">Reset</button></td>
+            </tr>
+        </table>
+    </form>
+    <br><br>
+
+    <div>
+
+    <h3>Your Submitted Information:</h3>
+    <p id="displayid"></p>
+    <p id="displayname"></p>
+    <p id="displayemail"></p>
+    <p id="displaydepartment"></p>
+    <p id="displaydate"></p>
+    <p id="displaygender"></p>
+    <p id="displaytype"></p>
+    </div>
+</body>
+
+</html>
